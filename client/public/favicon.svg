@@ -1,0 +1,11 @@
+<svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Door shape -->
+  <rect x="5" y="4" width="23" height="27" rx="2" fill="#85A4E1" fill-opacity="0.2" stroke="#85A4E1" stroke-width="2"/>
+  <!-- Door panels -->
+  <rect x="8" y="7" width="17" height="8" rx="1" fill="#85A4E1" fill-opacity="0.35"/>
+  <rect x="8" y="17" width="17" height="10" rx="1" fill="#85A4E1" fill-opacity="0.35"/>
+  <!-- Knob -->
+  <circle cx="21" cy="16.5" r="1.8" fill="#85A4E1"/>
+  <!-- Roof -->
+  <path d="M3 9L16.5 2L30 9" stroke="#85A4E1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
