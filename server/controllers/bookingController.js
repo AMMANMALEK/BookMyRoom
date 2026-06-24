@@ -85,10 +85,12 @@ export const createBooking = async (req, res) => {
             `
         }
 
-        // Send email without blocking the response
-        transporter.sendMail(mailOptions).catch(err =>
-            console.error("Email failed:", err.message)
-        );
+        // Await the email delivery to prevent Vercel from freezing the container prematurely
+        try {
+            await transporter.sendMail(mailOptions);
+        } catch (err) {
+            console.error("Email failed:", err.message);
+        }
 
         res.json({success: true, message: "Booking created successfully"});
     } catch (error) {
