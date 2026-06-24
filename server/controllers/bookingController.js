@@ -81,16 +81,19 @@ export const createBooking = async (req, res) => {
                     <li><strong>Total Price: </strong> $ ${booking.totalPrice}</li>
                 </ul>
                 <p>We look forward to welcoming you!</p>
-                <p>If you need to cancel or modify your booking, reply to this email or mail to us via dbundi758@gmail.com.</p>
+                <p>If you need to cancel or modify your booking, reply to this email or mail to us via ammankmalek@gmail.com.</p>
             `
         }
 
-        await transporter.sendMail(mailOptions)
+        // Send email without blocking the response
+        transporter.sendMail(mailOptions).catch(err =>
+            console.error("Email failed:", err.message)
+        );
 
         res.json({success: true, message: "Booking created successfully"});
     } catch (error) {
-        console.log(error);
-        res.json({success: false, message: "Failed to create booking"});
+        console.log("createBooking error:", error.message, error.stack);
+        res.json({success: false, message: error.message || "Failed to create booking"});
     }
 }
 
