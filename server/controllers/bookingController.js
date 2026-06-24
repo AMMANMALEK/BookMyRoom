@@ -81,7 +81,7 @@ export const createBooking = async (req, res) => {
                     <li><strong>Total Price: </strong> $ ${booking.totalPrice}</li>
                 </ul>
                 <p>We look forward to welcoming you!</p>
-                <p>If you need to cancel or modify your booking, reply to this email or mail to us via ammankmalek@gmail.com.</p>
+                <p>If you need to cancel or modify your booking, reply to this email or mail to us via ammanmalekyt@gmail.com.</p>
             `
         }
 
