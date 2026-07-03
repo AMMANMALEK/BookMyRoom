@@ -18,6 +18,7 @@ const AddRoom = () => {
     const [inputs, setInputs] = useState({
         roomType: '',
         pricePerNight: 0,
+        capacity: 2,
         amenities: {
             'Free Wifi': false,
             'Free Breakfast': false,
@@ -45,6 +46,7 @@ const AddRoom = () => {
             const formData = new FormData();
             formData.append('roomType', inputs.roomType);
             formData.append('pricePerNight', inputs.pricePerNight);
+            formData.append('capacity', inputs.capacity || 2);
             const amenities = Object.keys(inputs.amenities).filter(key => inputs.amenities[key]);
             formData.append('amenities', JSON.stringify(amenities));
 
@@ -60,6 +62,7 @@ const AddRoom = () => {
                 setInputs({
                     roomType: '',
                     pricePerNight: 0,
+                    capacity: 2,
                     amenities: {
                         'Free Wifi': false,
                         'Free Breakfast': false,
@@ -117,6 +120,11 @@ const AddRoom = () => {
                                 Price <span className='text-xs'>/night</span>
                             </p>
                             <input className='border border-gray-300 p-2 rounded' type="number" placeholder='0' value={inputs.pricePerNight} onChange={e=> setInputs({...inputs, pricePerNight: e.target.value})}/>
+                        </div>
+
+                        <div className='flex-1 max-w-48'>
+                            <p className='text-gray-800 mt-4'>Max Guests</p>
+                            <input className='border border-gray-300 p-2 rounded' type="number" placeholder='2' min="1" value={inputs.capacity || ''} onChange={e=> setInputs({...inputs, capacity: e.target.value})}/>
                         </div>
                     </div>
 

@@ -43,6 +43,11 @@ export const createBooking = async (req, res) => {
             return res.json({success: false, message: "Room is not availables"});
         }
 
+        // Check capacity
+        if (guests > roomData.capacity) {
+            return res.json({success: false, message: `This room can accommodate a maximum of ${roomData.capacity} guests`});
+        }
+
         //get total price from room details
         const roomData = await Room.findById(room).populate('hotel');
         let totalPrice = roomData.pricePerNight;
@@ -130,7 +135,7 @@ export const getHotelBookings = async (req, res) => {
         //Total Revenue
         const totalRevenue = bookings.reduce((acc, booking) => acc + booking.totalPrice, 0);
 
-        res.json({success: true, dashboardData: {totalBookings, totalRevenue, bookings}});
+        res.json({success: true, dashboardData: {totalBookings, totalRevenue, bookings, hotelName: hotel.name}});
     } catch (error) {
         res.json({success: false, message: "Failed to fetch hotel bookings"});
     }

@@ -12,6 +12,7 @@ const Dashboard = () => {
         bookings: [],
         totalBookings: 0,
         totalRevenue: 0,
+        hotelName: '',
     });  
 
     //fetch dashboard data
@@ -38,6 +39,10 @@ const Dashboard = () => {
     return (
         <div>
             <Title align="left" font="outfit" title="Dashboard" subTitle="Monitor your room listings, track bookings and analyze revenue- all in one place. Stay updated with real time insights to ensure smooth operation." />
+
+            {dashboardData.hotelName && (
+                <p className='text-2xl font-semibold text-blue-950 mt-2'>{dashboardData.hotelName}</p>
+            )}
 
             <div className='flex gap-4 my-8'>
                 <div className='bg-primary/3 border border-primary/10 rounded flex p-4 pr-8'>

@@ -5,7 +5,7 @@ import Room from "../models/Room.js";
 //API to create a new room for a hotel
 export const createRoom = async (req, res)=>{
     try {
-        const {roomType, pricePerNight, amenities} = req.body;
+        const {roomType, pricePerNight, amenities, capacity} = req.body;
         const hotel = await Hotel.findOne({owner: req.auth.userId});
 
         if(!hotel){
@@ -25,6 +25,7 @@ export const createRoom = async (req, res)=>{
             hotel: hotel._id,
             roomType,
             pricePerNight: +pricePerNight,
+            capacity: +capacity || 2,
             amenities: JSON.parse(amenities),
             images
         })

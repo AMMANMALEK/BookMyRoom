@@ -50,6 +50,10 @@ const RoomDetails = ()=>{
                 if(!isAvailable){
                     return checkAvailability();
                 } else{
+                    if(guests > room.capacity){
+                        toast.error(`Maximum ${room.capacity} guests allowed for this room`);
+                        return;
+                    }
                     const {data} = await axios.post('/api/bookings/book', {room: id, checkInDate, checkOutDate, guests, paymentMethod: "Pay at hotel"}, {headers: {Authorization: `Bearer ${await getToken()}`}});
                     if(data.success){
                         toast.success(data.message);
@@ -138,8 +142,8 @@ const RoomDetails = ()=>{
                     </div>
                     <div className='w-px h-15 bg-gray-300/70 max-md:hidden'></div>
                     <div className='flex flex-col'>
-                        <label htmlFor="guests" className='font-medium'>Guests</label>
-                        <input onChange={(e)=> setGuests(e.target.value)} value={guests} type="number" id="guests" placeholder='1' className='max-w-20 rounded border border-gray-300 px-3 py-2 mt-1.5 outline-none' required/>
+                        <label htmlFor="guests" className='font-medium'>Guests <span className='text-xs text-gray-400'>(max {room.capacity})</span></label>
+                        <input onChange={(e)=> setGuests(e.target.value)} value={guests} type="number" id="guests" min="1" max={room.capacity} placeholder='1' className='max-w-20 rounded border border-gray-300 px-3 py-2 mt-1.5 outline-none' required/>
                     </div>
 
                 </div>
