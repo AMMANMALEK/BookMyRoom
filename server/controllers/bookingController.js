@@ -43,13 +43,14 @@ export const createBooking = async (req, res) => {
             return res.json({success: false, message: "Room is not availables"});
         }
 
+        //get total price from room details
+        const roomData = await Room.findById(room).populate('hotel');
+        
         // Check capacity
         if (guests > roomData.capacity) {
             return res.json({success: false, message: `This room can accommodate a maximum of ${roomData.capacity} guests`});
         }
 
-        //get total price from room details
-        const roomData = await Room.findById(room).populate('hotel');
         let totalPrice = roomData.pricePerNight;
 
         //calculate total price based on number of nights

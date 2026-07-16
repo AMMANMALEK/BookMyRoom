@@ -50,11 +50,11 @@ const RoomDetails = ()=>{
                 if(!isAvailable){
                     return checkAvailability();
                 } else{
-                    if(guests > room.capacity){
+                    if(Number(guests) > room.capacity){
                         toast.error(`Maximum ${room.capacity} guests allowed for this room`);
                         return;
                     }
-                    const {data} = await axios.post('/api/bookings/book', {room: id, checkInDate, checkOutDate, guests, paymentMethod: "Pay at hotel"}, {headers: {Authorization: `Bearer ${await getToken()}`}});
+                    const {data} = await axios.post('/api/bookings/book', {room: id, checkInDate, checkOutDate, guests: Number(guests), paymentMethod: "Pay at hotel"}, {headers: {Authorization: `Bearer ${await getToken()}`}});
                     if(data.success){
                         toast.success(data.message);
                         navigate('/my-bookings');
