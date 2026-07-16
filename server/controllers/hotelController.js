@@ -22,3 +22,12 @@ export const registerHotel = async(req, res)=>{
         res.json({success: false, message: error.message});
     }
 }
+
+export const getAvailableCities = async(req, res)=>{
+    try {
+        const cities = await Hotel.distinct('city');
+        res.json({success: true, cities});
+    } catch (error) {
+        res.json({success: false, message: error.message});
+    }
+}

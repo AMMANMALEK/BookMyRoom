@@ -138,7 +138,7 @@ const RoomDetails = ()=>{
                     <div className='w-px h-15 bg-gray-300/70 max-md:hidden'></div>
                     <div className='flex flex-col'>
                         <label htmlFor="checkOutDate" className='font-medium'>Check-Out</label>
-                        <input onChange={(e)=> setCheckOutDate(e.target.value)} min={checkInDate} disabled={!checkInDate} type="date" id="checkOutDate" placeholder='check out' className='w-full rounded border border-gray-300 px-3 py-2 mt-1.5 outline-none' required/>
+                        <input onChange={(e)=> setCheckOutDate(e.target.value)} min={checkInDate || new Date().toISOString().split('T')[0]} disabled={!checkInDate} type="date" id="checkOutDate" placeholder='check out' className='w-full rounded border border-gray-300 px-3 py-2 mt-1.5 outline-none' required/>
                     </div>
                     <div className='w-px h-15 bg-gray-300/70 max-md:hidden'></div>
                     <div className='flex flex-col'>

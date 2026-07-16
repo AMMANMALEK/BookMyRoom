@@ -20,6 +20,7 @@ export const AppProvider = ({ children }) => {
     const [showHotelReg, setShowHotelReg] = useState(false);
     const [searchedCities, setSearchedCities] = useState([]);
     const [rooms, setRooms] = useState([]);
+    const [availableCities, setAvailableCities] = useState([]);
 
     const fetchRooms = async () => {
         try {
@@ -31,6 +32,17 @@ export const AppProvider = ({ children }) => {
             }
         } catch (error) {
             toast.error(error.message);
+        }
+    }
+
+    const fetchAvailableCities = async () => {
+        try {
+            const {data} = await axios.get('/api/hotels/cities');
+            if(data.success) {
+                setAvailableCities(data.cities);
+            }
+        } catch (error) {
+            console.error('Failed to fetch cities:', error.message);
         }
     }
 
@@ -63,6 +75,7 @@ export const AppProvider = ({ children }) => {
 
     useEffect(() => {
         fetchRooms();
+        fetchAvailableCities();
     }, []);
 
     const value = {
@@ -81,6 +94,7 @@ export const AppProvider = ({ children }) => {
         setRooms,
         loadingUser,
         fetchUser,
+        availableCities,
     }
 
     return (

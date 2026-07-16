@@ -1,11 +1,18 @@
-import React, { useState } from 'react'
-import { assets, cities } from '../assets/assets'
+import React, { useState, useEffect } from 'react'
+import { assets } from '../assets/assets'
 import { useAppContext } from '../context/AppContext';
 
 const Hero = () => {
 
-  const {axios, getToken, navigate, setSearchedCities} = useAppContext();
+  const {axios, getToken, navigate, setSearchedCities, availableCities} = useAppContext();
   const [destination, setDestination] = useState("");
+  const [minDate, setMinDate] = useState("");
+
+  useEffect(() => {
+    // Set minimum date to today
+    const today = new Date().toISOString().split('T')[0];
+    setMinDate(today);
+  }, []);
 
   const onSearch = async (e) => {
     e.preventDefault();
@@ -38,9 +45,17 @@ const Hero = () => {
                     <img src={assets.calenderIcon} alt="" className='h-4'/>
                     <label htmlFor="destinationInput">Destination</label>
                 </div>
-                <input onChange={(e)=> setDestination(e.target.value)} list='destinations' id="destinationInput" type="text" className=" rounded border border-gray-200 px-3 py-1.5 mt-1.5 text-sm outline-none" placeholder="Type here" required />
+                <input 
+                    onChange={(e)=> setDestination(e.target.value)} 
+                    list='destinations' 
+                    id="destinationInput" 
+                    type="text" 
+                    className=" rounded border border-gray-200 px-3 py-1.5 mt-1.5 text-sm outline-none" 
+                    placeholder="Type here" 
+                    required 
+                />
                 <datalist id='destinations'>
-                    {cities.map((city,index)=>(
+                    {availableCities.map((city,index)=>(
                         <option value={city} key={index}/>
                     ))}
                 </datalist>
@@ -51,7 +66,12 @@ const Hero = () => {
                     <img src={assets.calenderIcon} alt="" className='h-4'/>
                     <label htmlFor="checkIn">Check in</label>
                 </div>
-                <input id="checkIn" type="date" className=" rounded border border-gray-200 px-3 py-1.5 mt-1.5 text-sm outline-none" />
+                <input 
+                    id="checkIn" 
+                    type="date" 
+                    min={minDate}
+                    className=" rounded border border-gray-200 px-3 py-1.5 mt-1.5 text-sm outline-none" 
+                />
             </div>
 
             <div>
@@ -59,7 +79,12 @@ const Hero = () => {
                     <img src={assets.calenderIcon} alt="" className='h-4'/>
                     <label htmlFor="checkOut">Check out</label>
                 </div>
-                <input id="checkOut" type="date" className=" rounded border border-gray-200 px-3 py-1.5 mt-1.5 text-sm outline-none" />
+                <input 
+                    id="checkOut" 
+                    type="date" 
+                    min={minDate}
+                    className=" rounded border border-gray-200 px-3 py-1.5 mt-1.5 text-sm outline-none" 
+                />
             </div>
 
             <div className='flex md:flex-col max-md:gap-2 max-md:items-center'>
