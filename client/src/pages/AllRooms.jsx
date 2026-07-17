@@ -39,7 +39,7 @@ const AllRooms = () =>{
     const roomTypes = [
       "Single Bed",
       "Double Bed",
-      "Luxury Bed",
+      "Luxury Room",
       "Family Suite",
     ];
 
@@ -79,7 +79,7 @@ const AllRooms = () =>{
 
     //function to check if room matches selected room type
     const matchesRoomType = (room) => {
-      return selectedFilters.roomType.length === 0 || selectedFilters.roomType.includes(room.type);
+      return selectedFilters.roomType.length === 0 || selectedFilters.roomType.includes(room.roomType);
     }
 
     //function to check if room matches selected price range
@@ -152,7 +152,7 @@ const AllRooms = () =>{
                   </div>
                   <div className="flex flex-wrap items-center mt-3 mb-6 gap-4 ">
                     {room.amenities.map((item,index)=>(
-                      <div>
+                      <div key={index}>
                         <img src={facilityIcons[item]} alt={item} className='w-5 h-5'/>
                         <p className='text-xs'>{item}</p>
                       </div>
@@ -169,7 +169,7 @@ const AllRooms = () =>{
               <p className='text-base font-medium text-gray-800'>FILTERS</p>
               <div className='text-xs cursor-pointer'>
                 <span onClick={()=> setOpenFilters(!openFilters)} className='lg:hidden'>{openFilters ? 'HIDE' : 'SHOW'}</span>
-                <span className='hidden lg:block'>CLEAR</span>
+                <span onClick={clearFilters} className='hidden lg:block'>CLEAR</span>
               </div>
             </div>
 

@@ -175,15 +175,25 @@ const RoomDetails = ()=>{
                 <div className='flex gap-4'>
                     <img src={room.hotel.owner.image} alt="hotel-owner" className='h-14 w-14 md:h-18 md:w-18 rounded-full'/>
                     <div>
-                        <p>{room.hotel.name}</p>
+                        <p className='font-medium'>{room.hotel.name}</p>
                         <div className='flex items-center mt-1'>
                             <StarRating />
                             <p className='ml-2'>200+ Reviews</p>
                         </div>
+                        {room.hotel.contact && (
+                            <p className='text-sm text-gray-600 mt-1'>
+                                Contact: {room.hotel.contact}
+                            </p>
+                        )}
                     </div>
                 </div>
             </div>
-            <button className='px-6 py-2.5 mt-4 rounded text-white bg-primary hover:bg-primary-dull transition-all cursor-pointer'>Contact Now</button>
+            <a 
+                href={`tel:${room.hotel.contact}`} 
+                className='inline-block px-6 py-2.5 mt-4 rounded text-white bg-primary hover:bg-primary-dull transition-all cursor-pointer text-center'
+            >
+                Contact Now
+            </a>
         </div>
     )
 }
