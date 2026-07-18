@@ -58,7 +58,7 @@ export const createBooking = async (req, res) => {
         const checkOut = new Date(checkOutDate);
         const timeDiff = checkOut.getTime() - checkIn.getTime();
         const nights = Math.ceil(timeDiff / (1000 * 3600 * 24));
-
+    
         totalPrice *= nights;
         //create booking
         const booking = await Booking.create({
@@ -84,7 +84,7 @@ export const createBooking = async (req, res) => {
                     <li><strong>Hotel Name: </strong> ${roomData.hotel.name}</li>
                     <li><strong>Date: </strong> ${booking.checkInDate.toDateString()}</li>
                     <li><strong>Guests: </strong> ${booking.guests}</li>
-                    <li><strong>Total Price: </strong> $ ${booking.totalPrice}</li>
+                    <li><strong>Total Price: </strong> ₹ ${booking.totalPrice}</li>
                 </ul>
                 <p>We look forward to welcoming you!</p>
                 <p>If you need to cancel or modify your booking, reply to this email or mail to us via ammanmalekyt@gmail.com.</p>
@@ -155,7 +155,7 @@ export const stripePayment = async (req, res) => {
         const line_items = [
             {
                 price_data: {
-                    currency: 'usd',
+                    currency: 'inr',
                     product_data: {
                         name: roomData.hotel.name,
                         description: `Booking for ${roomData.name}`,

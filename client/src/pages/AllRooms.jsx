@@ -44,10 +44,10 @@ const AllRooms = () =>{
     ];
 
     const priceRanges = [
-      "0 to 500",
-      "500 to 1000",
-      "1000 to 2000",
-      "2000 to 3000",
+      "0 to 2000",
+      "2000 to 5000",
+      "5000 to 10000",
+      "10000 to 20000",
     ];
 
     const sortOptions = [
@@ -158,7 +158,7 @@ const AllRooms = () =>{
                       </div>
                     ))}
                   </div>
-                  <p className='text-xl font-medium text-gray-700'>${room.pricePerNight}/ night</p>
+                  <p className='text-xl font-medium text-gray-700'>₹{room.pricePerNight}/ night</p>
                 </div>
               </div>
             ))}

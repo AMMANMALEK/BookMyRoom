@@ -10,7 +10,7 @@ const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
 
-    const currency = import.meta.env.VITE_CURRENCY || '$';
+    const currency = import.meta.env.VITE_CURRENCY || '₹';
     const {user} = useUser();
     const { getToken } = useAuth();
     const navigate = useNavigate();
